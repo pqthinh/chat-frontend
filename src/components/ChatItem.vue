@@ -50,7 +50,7 @@ export default defineComponent({
     },
     file: {
       type: String,
-      default: "https://cdn.quasar.dev/img/avatar3.jpg",
+      default: null,
     },
   },
 });

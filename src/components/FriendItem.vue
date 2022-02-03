@@ -15,30 +15,34 @@
 <script>
 import { defineComponent } from "vue";
 import { useQuasar } from "quasar";
+import { api } from "boot/axios";
 
 export default defineComponent({
   name: "FriendList",
   props: {
+    id: {
+      default: 0,
+    },
     uid: {
       type: String,
     },
     name: {
       type: String,
-      default: "Thanhnt",
+      default: "Thinhpqs",
     },
     avatar: {
       type: String,
       default: "https://cdn.quasar.dev/img/avatar3.jpg",
     },
   },
-  setup() {
+  setup(props, ctx) {
     const $q = useQuasar();
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     const createRoom = async () => {
       const { id } = user;
       const res = await api.post("/chat/create-room", {
         uid: id,
-        listUser: [uid],
+        listUser: [props?.id],
       });
       const { roomId } = res;
       if (roomId) localStorage.setItem("roomId", roomId);
